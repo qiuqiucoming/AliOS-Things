@@ -26,12 +26,12 @@
 #define LOG_NONE    8 /* used in stop filter, all log will pop out */
 
 typedef enum {
-    AOS_LL_NONE  = LOG_EMERG,   /* disable log */
-    AOS_LL_FATAL = LOG_CRIT,    /* fatal log will output */
-    AOS_LL_ERROR = LOG_ERR,     /* fatal + error log will output */
-    AOS_LL_WARN  = LOG_WARNING, /* fatal + warn + error log will output(default level) */
-    AOS_LL_INFO  = LOG_INFO,    /* info + warn + error log will output */
-    AOS_LL_DEBUG = LOG_DEBUG,   /* debug + info + warn + error + fatal log will output */
+    AOS_LL_NONE  = LOG_EMERG,   /* disable log 关闭日志*/
+    AOS_LL_FATAL = LOG_CRIT,    /* fatal log will output 输出致命日志*/
+    AOS_LL_ERROR = LOG_ERR,     /* fatal + error log will output 输出致命日志加错误*/
+    AOS_LL_WARN  = LOG_WARNING, /* fatal + warn + error log will output(default level) 输出致命日志、错误和警告日志*/
+    AOS_LL_INFO  = LOG_INFO,    /* info + warn + error log will output 输出信息、警告和错误日志*/
+    AOS_LL_DEBUG = LOG_DEBUG,   /* debug + info + warn + error + fatal log will output 所有日志都输出*/
 } aos_log_level_t;
 
 #ifdef __cplusplus

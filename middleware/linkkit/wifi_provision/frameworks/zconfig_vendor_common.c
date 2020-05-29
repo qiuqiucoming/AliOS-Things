@@ -274,6 +274,7 @@ void zconfig_sleep_before_rescan()
  * linux/rtos平台差异
  * --vendor_recv_80211_frame()有实现，rtos平台该函数通常为空，通过注册callback方式收包
  */
+// 该函数的主要用途是用来进行通道扫描
 void aws_main_thread_func(void)
 {
     int interval = 0;
@@ -466,9 +467,9 @@ void aws_start(char *pk, char *dn, char *ds, char *ps)
     aws_result_encry = ZC_ENC_TYPE_INVALID;
     aws_result_channel = 0;
 
-    zconfig_init();
+    zconfig_init(); // 负责分配内存
 
-    HAL_Awss_Open_Monitor(aws_80211_frame_handler);
+    HAL_Awss_Open_Monitor(aws_80211_frame_handler); // 设置网卡的工作方式为监听模式
 #ifndef AWSS_DISABLE_ENROLLEE
     awss_init_enrollee_info();
 #endif

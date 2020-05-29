@@ -103,7 +103,7 @@ static void wifi_service_event(input_event_t *event, void *priv_data)
 #ifdef CONFIG_PRINT_HEAP
         print_heap();
 #endif
-        aos_task_new("linkkit", (void (*)(void *))linkkit_main, NULL, 1024 * 8);
+        aos_task_new("linkkit", (void (*)(void *))linkkit_main, NULL, 1024 * 8); // 这里就是进行真正的联网操作
         linkkit_started = 1;
     }
 }
@@ -307,20 +307,20 @@ static void do_awss_reset()
     aos_post_delayed_action(2000, linkkit_reset, NULL);
 }
 
-
+// 这个函数其实可以与esp8266/bps/key.c一起看，可以看到esp是如何实现上报函数来和这里的事件判断进行适配的
 void linkkit_key_process(input_event_t *eventinfo, void *priv_data)
 {
     if (eventinfo->type != EV_KEY) {
         return;
     }
     LOG("awss config press %u\n", eventinfo->value);
+    
+    if (eventinfo->code == CODE_BOOT) { // 点击引脚类型为code_boot类型，其实个人觉得这里只是为了继续讲事件细分，因为这个code是由mcu模块可以设置发送过来的，而不是固定的
+        if (eventinfo->value == VALUE_KEY_CLICK) { // 短按事件
 
-    if (eventinfo->code == CODE_BOOT) {
-        if (eventinfo->value == VALUE_KEY_CLICK) {
-
-            do_awss_active();
-        } else if (eventinfo->value == VALUE_KEY_LTCLICK) {
-            do_awss_reset();
+            do_awss_active(); // 进入配网模式
+        } else if (eventinfo->value == VALUE_KEY_LTCLICK) { // 长按事件
+            do_awss_reset(); // 清除配网模式
         }
     }
 }
@@ -483,11 +483,11 @@ int application_start(int argc, char **argv)
     HAL_MDAL_MAL_Init();
 #endif
 
-    aos_set_log_level(AOS_LL_DEBUG);
-    set_iotx_info();
-    netmgr_init();
-    aos_register_event_filter(EV_KEY, linkkit_key_process, NULL);
-    aos_register_event_filter(EV_WIFI, wifi_service_event, NULL);
+    aos_set_log_level(AOS_LL_DEBUG); // 设置AOS的日志打印水平
+    set_iotx_info(); // 配置设备的四元组
+    netmgr_init(); // 里面根据编译选项进行编译，但一般主要是调用了netmgr_wifi_init函数进行wifi初始化，具体请看netmgr_wifi_init函数，文件位于netmgr_wifi.c 
+    aos_register_event_filter(EV_KEY, linkkit_key_process, NULL); // 按键事件注册，这些事件可以再具体的platform那边调用aos_post_event上报
+    aos_register_event_filter(EV_WIFI, wifi_service_event, NULL); // 里面调用的linkkit_main函数就是进行真正的联网
     aos_register_event_filter(EV_YUNIO, cloud_service_event, NULL);
     IOT_RegisterCallback(ITE_MQTT_CONNECT_SUCC, mqtt_connected_event_handler);
 

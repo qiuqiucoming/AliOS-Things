@@ -25,10 +25,10 @@
 #include "app_entry.h"
 
 // for demo only
-#define PRODUCT_KEY      "a1FxISeKbq9"
-#define PRODUCT_SECRET   "ThNbP5iNUQ1lQe2Q"
-#define DEVICE_NAME      "alen-activate-test"
-#define DEVICE_SECRET    "jcumDL5AJRgU7zRNcCcnHRiQmtii0vDn"
+#define PRODUCT_KEY      "a1PY3X7opFl"
+#define PRODUCT_SECRET   "AQRyQSuN8DPYLVWV"
+#define DEVICE_NAME      "smart01"
+#define DEVICE_SECRET    "yACDSse5DwNWRBFVpqCrWMFXbiI6Heji"
 
 #define EXAMPLE_TRACE(...)                                          \
     do {                                                            \
@@ -212,8 +212,8 @@ static int user_cota_event_handler(int type, const char *config_id, int config_s
 
     return 0;
 }
-
-void user_post_property(void)
+// 用户属性上报， 可以把你想要上报的用户属性在这里以json的格式添加进来
+void user_post_property(void) 
 {
     static int cnt = 0;
     int res = 0;
@@ -226,7 +226,7 @@ void user_post_property(void)
 
     EXAMPLE_TRACE("Post Property Message ID: %d", res);
 }
-
+// 用户事件上报
 void user_post_event(void)
 {
     int res = 0;
@@ -313,7 +313,7 @@ int linkkit_main(void *paras)
     IOT_SetLogLevel(IOT_LOG_INFO);
 
     /* Register Callback */
-    IOT_RegisterCallback(ITE_CONNECT_SUCC, user_connected_event_handler);
+    IOT_RegisterCallback(ITE_CONNECT_SUCC, user_connected_event_handler); // 与云端链接成功
     IOT_RegisterCallback(ITE_DISCONNECTED, user_disconnected_event_handler);
     IOT_RegisterCallback(ITE_SERVICE_REQUEST, user_service_request_event_handler);
     IOT_RegisterCallback(ITE_PROPERTY_SET, user_property_set_event_handler);
@@ -371,7 +371,7 @@ int linkkit_main(void *paras)
         IOT_Linkkit_Yield(EXAMPLE_YIELD_TIMEOUT_MS);
 
         /* Post Proprety Example */
-
+        // 这里就是关键之处，实现用户自己的数据属性与事件的上报实现
         if ((cnt % 20) == 0) {
             user_post_property();
         }

@@ -704,11 +704,12 @@ static autoconfig_plugin_t g_def_smartconfig = {
 #endif
 #endif
 
+// 其实就是干了一些初始化的工作，如到底是什么wifi模块，读取保存的wifi信息等等
 int netmgr_wifi_init(void)
 {
-    hal_wifi_module_t *module;
+    hal_wifi_module_t *module; // 这个结构体里面就是一些wifi模块基本信息
 
-    aos_register_event_filter(EV_WIFI, netmgr_events_executor, NULL);
+    aos_register_event_filter(EV_WIFI, netmgr_events_executor, NULL); // 注册wifi时间
 
 #ifdef AOS_COMP_CLI
     aos_cli_register_command(&ncmd);
@@ -718,7 +719,7 @@ int netmgr_wifi_init(void)
     memset(&g_netmgr_cxt, 0, sizeof(g_netmgr_cxt));
     g_netmgr_cxt.ip_available = false;
     g_netmgr_cxt.wifi_scan_complete_cb_finished = false;
-    g_netmgr_cxt.wifi_hal_mod = module;
+    g_netmgr_cxt.wifi_hal_mod = module; // 硬件wifi模块例如8266
 #if !defined(WITH_SAL) || defined(DEV_SAL_ATHOST)
 #if defined(CONFIG_YWSS) && (!defined(CSP_LINUXHOST) || defined(DEV_SAL_ATHOST))
     add_autoconfig_plugin(&g_alink_smartconfig);

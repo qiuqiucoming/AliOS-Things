@@ -19,10 +19,10 @@
 #include "app_entry.h"
 
 // for demo only
-#define PRODUCT_KEY      "a1ikrQdGiG8"
-#define PRODUCT_SECRET   "UgqWfzL5B2zNvglF"
-#define DEVICE_NAME      "test_cd_02"
-#define DEVICE_SECRET    "O0wxZBV3AEL5SKCpXmc6vGr2B6eMFxdS"
+#define PRODUCT_KEY      "a1PY3X7opFl"
+#define PRODUCT_SECRET   "AQRyQSuN8DPYLVWV"
+#define DEVICE_NAME      "smart01"
+#define DEVICE_SECRET    "yACDSse5DwNWRBFVpqCrWMFXbiI6Heji"
 
 #define EXAMPLE_TRACE(fmt, ...)  \
     do { \

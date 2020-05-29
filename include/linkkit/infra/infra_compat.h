@@ -94,25 +94,25 @@ unsigned int aos_get_version_info(unsigned char version_num[VERSION_NUM_SIZE],
 
 typedef enum {
     ITE_AWSS_STATUS,
-    ITE_CONNECT_SUCC,
-    ITE_CONNECT_FAIL,
-    ITE_DISCONNECTED,
-    ITE_RAWDATA_ARRIVED,
-    ITE_SERVICE_REQUEST,
-    ITE_SERVICE_REQUEST_EXT,
-    ITE_PROPERTY_SET,
-    ITE_PROPERTY_GET,
+    ITE_CONNECT_SUCC, // 与云端连接成功事件
+    ITE_CONNECT_FAIL, // 与云端连接失败事件
+    ITE_DISCONNECTED, // 连接断开事件
+    ITE_RAWDATA_ARRIVED, // linkkit收到rawdata数据
+    ITE_SERVICE_REQUEST, // linkkit收到服务调用请求
+    ITE_SERVICE_REQUEST_EXT, 
+    ITE_PROPERTY_SET, // linkkit收到属性设置请求
+    ITE_PROPERTY_GET, // linkkit收到属性获取请求
 #ifdef DEVICE_MODEL_SHADOW
     ITE_PROPERTY_DESIRED_GET_REPLY,
 #endif
-    ITE_REPORT_REPLY,
-    ITE_TRIGGER_EVENT_REPLY,
-    ITE_TIMESTAMP_REPLY,
-    ITE_TOPOLIST_REPLY,
-    ITE_PERMIT_JOIN,
-    ITE_INITIALIZE_COMPLETED,
-    ITE_FOTA,
-    ITE_COTA,
+    ITE_REPORT_REPLY, // linkkit收到上报消息的应答
+    ITE_TRIGGER_EVENT_REPLY, // linkkit收到事件上报的应答
+    ITE_TIMESTAMP_REPLY, // linkkit收到查询时间戳请求的应答事件
+    ITE_TOPOLIST_REPLY, // linkkit收到查询拓扑关系请求的应答事件
+    ITE_PERMIT_JOIN, // linkkit收到子设备入网请求
+    ITE_INITIALIZE_COMPLETED, 
+    ITE_FOTA, // linkkit收到可用固件通知
+    ITE_COTA, // linkkit收到可用远程配置文件通知
     ITE_MQTT_CONNECT_SUCC,
     ITE_CLOUD_ERROR,
 } iotx_ioctl_event_t;

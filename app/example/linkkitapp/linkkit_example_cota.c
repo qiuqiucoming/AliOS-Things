@@ -14,10 +14,10 @@
 #endif
 #include "app_entry.h"
 
-#define PRODUCT_KEY      "a1X2bEnP82z"
-#define PRODUCT_SECRET   "7jluWm1zql7bt8qK"
-#define DEVICE_NAME      "test_0109_82z_service_kj"
-#define DEVICE_SECRET    "8woc2VehSB8HI3Isd6R9xZXBvBaKfqzV"
+#define PRODUCT_KEY      "a1PY3X7opFl"
+#define PRODUCT_SECRET   "AQRyQSuN8DPYLVWV"
+#define DEVICE_NAME      "smart01"
+#define DEVICE_SECRET    "yACDSse5DwNWRBFVpqCrWMFXbiI6Heji"
 
 #define USE_CUSTOME_DOMAIN              (0)
 

@@ -19,10 +19,10 @@
 #ifdef EN_COMBO_NET
     #include "combo_devinfo.h"
 #else
-    #define PRODUCT_KEY    "a1ybTpus98a"
-    #define PRODUCT_SECRET "iX6XqAjaCTXBv4h3"
-    #define DEVICE_NAME    "testdevshadow1228"
-    #define DEVICE_SECRET  "XWpUcNcmLDolAjPYi4fOmmrVFvhuxk9v"
+#define PRODUCT_KEY      "a1PY3X7opFl"
+#define PRODUCT_SECRET   "AQRyQSuN8DPYLVWV"
+#define DEVICE_NAME      "smart01"
+#define DEVICE_SECRET    "yACDSse5DwNWRBFVpqCrWMFXbiI6Heji"
     // for demo only
 #endif
 
